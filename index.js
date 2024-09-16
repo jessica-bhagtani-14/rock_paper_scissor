@@ -3,6 +3,8 @@ console.log("Hello");
 let humanScore=0;
 let computerScore=0;
 
+const data=document.querySelector("#data");
+
 function getComputerChoice()
 {
     let x=Math.floor(Math.random()*3)+1;
@@ -17,46 +19,52 @@ function getHumanChoice()
     return y;
 }
 
-function round(i)
+function round(a)
 {
-    alert("This is "+i+" round");
+    //alert("This is "+i+" round");
     let x=getComputerChoice();
-    let y=getHumanChoice();
+    let y=a;
     if(x==y)
     {
         alert("Its a tie. Try again");
-        round();
+        return;
     }
     else if(x==1 && y==3)
     {    
         computerScore+=1;
-        alert("Computer won this round");
+        data.textContent="Computer won this round";
     }
     else if(x==3 && y==1)
     {
         humanScore+=1;
-        alert("Human won this round");
+        data.textContent="Human won this round";
     }
     else if(x==1 && y==2)
     {
         humanScore+=1;
-        alert("Human won this round");
+        data.textContent="Human won this round";
     }
     else if(x==2 && y==1)
     {    
         computerScore+=1;
-        alert("Computer won this round");
+        data.textContent="Computer won this round";
     }
     else if(x==2 && y==3)
     {
         humanScore+=1;
-        alert("Human won this round");
+        data.textContent="Human won this round";
     }
     else if(x==3 && y==2)
     {    
         computerScore+=1;
-        alert("Computer won this round");
+        data.textContent="Computer won this round";
     }
+    data.textContent += ` | Human score = ${humanScore} and Computer score = ${computerScore}`;
+
+    if(humanScore===5)
+        data.textContent += " | Human won";
+    else if(computerScore===5)
+        data.textContent+= " | Computer won";
 }
 
 function Game()
@@ -72,4 +80,16 @@ function Game()
         alert("Computer won the game");
 }
 
-Game();
+const rock=document.querySelector("#rock");
+console.log(rock);
+
+rock.addEventListener("click",()=>round(1));
+const paper=document.querySelector("#paper");
+console.log(paper);
+
+paper.addEventListener("click",()=>round(2));
+
+const scissor=document.querySelector("#scissor");
+console.log(scissor);
+
+scissor.addEventListener("click",()=>round(3));
